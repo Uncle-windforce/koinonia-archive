@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koinonia Archive · 코이노니아 아카이브</title>
+<meta name="description" content="All is Yours — 내가 가진 모든 지식과 자료가 곧 당신의 것">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ec;--paper:#fffdf9;--ink:#26221c;--ink2:#4d4639;--muted:#857d6e;--line:#e5ddcc;--line2:#d7cdb6;
+  --accent:#8b4a2b;--accent2:#b86a3f;--accent-soft:#f4e7db;--gold:#c9a24c;--ok:#2f7d4f;--bad:#b23b3b;
+  --shadow:0 1px 2px rgba(50,35,15,.05),0 8px 24px rgba(50,35,15,.06);
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Noto Serif KR",Georgia,serif}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 18px}}
+.hidden{display:none!important}
+
+/* ── 헤더 ── */
+.top{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:700;font-family:"Noto Serif KR",serif;font-size:18px}
+.brand b{font-size:19px;letter-spacing:.2px;display:block;line-height:1.1}
+.brand span{font-size:12px;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a{font-size:14px;color:var(--ink2);text-decoration:none;padding:8px 12px;border-radius:8px}
+.nav a:hover{background:var(--accent-soft);color:var(--accent)}
+.lang{display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden;margin-left:8px}
+.lang button{border:0;background:transparent;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted)}
+.lang button.on{background:var(--ink);color:#fff}
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);background:var(--paper);color:var(--ink);padding:8px 15px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.accent:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.btn.danger{color:var(--bad);border-color:#e6c6c6}
+.btn.danger:hover{background:var(--bad);color:#fff;border-color:var(--bad)}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:8px}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:13px}
+.menu{position:relative}
+.menu .dd{position:absolute;right:0;top:calc(100% + 8px);background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);min-width:200px;padding:6px;display:none;z-index:60}
+.menu.open .dd{display:block}
+.dd button,.dd a{display:block;width:100%;text-align:left;border:0;background:transparent;padding:9px 12px;border-radius:8px;font-size:14px;text-decoration:none;color:var(--ink)}
+.dd button:hover,.dd a:hover{background:var(--accent-soft)}
+.dd .who{padding:8px 12px 10px;border-bottom:1px solid var(--line);margin-bottom:6px;font-size:13px;color:var(--muted)}
+.dd .who b{display:block;color:var(--ink);font-size:14px}
+
+/* ── 히어로 ── */
+.hero{padding:76px 0 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 70%);opacity:.9;pointer-events:none}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+.hero h1{margin:0 0 18px;font-size:50px;line-height:1.18;font-weight:700;max-width:760px;letter-spacing:-.01em}
+.hero .lead{margin:0;max-width:640px;font-size:17px;color:var(--ink2)}
+.motto{margin-top:26px;display:inline-flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 18px;box-shadow:var(--shadow)}
+.motto .en{font-family:"Noto Serif KR",Georgia,serif;font-weight:700;color:var(--accent);font-size:16px;letter-spacing:.02em}
+.motto .ko{font-size:14px;color:var(--ink2)}
+.stats{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.stat b{display:block;font-size:26px;font-family:"Noto Serif KR",serif;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+@media(max-width:640px){.hero{padding:44px 0 28px}.hero h1{font-size:34px}}
+
+/* ── 툴바 ── */
+.toolbar{padding:8px 0 4px}
+.searchbox{position:relative}
+.searchbox input{width:100%;font-size:16px;padding:16px 56px 16px 52px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:var(--shadow);outline:none;transition:.15s}
+.searchbox input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.searchbox svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.kbd{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 8px;background:var(--bg)}
+.filters{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 10px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:13.5px;padding:7px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--paper);color:var(--ink);transition:.15s;display:inline-flex;gap:6px;align-items:center}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip small{opacity:.65}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.right{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+select.sel{padding:7px 32px 7px 10px;border:1px solid var(--line2);border-radius:9px;background:var(--paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23857d6e' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>") no-repeat right 10px center;appearance:none;font-size:13px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:var(--paper);padding:6px 9px;color:var(--muted);display:grid;place-items:center}
+.seg button.on{background:var(--ink);color:#fff}
+
+/* ── 목록 ── */
+main{padding:10px 0 80px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid.list{grid-template-columns:1fr}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .15s,border-color .15s;cursor:pointer;position:relative}
+.card:hover{transform:translateY(-3px);border-color:var(--line2)}
+.cover{height:150px;background:linear-gradient(135deg,#efe6d6,#f7f1e6);display:grid;place-items:center;position:relative;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover .ty{font-family:"Noto Serif KR",serif;font-size:34px;font-weight:700;color:#b9a98a;letter-spacing:.05em}
+.cover .flag{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+.pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.9);color:var(--ink2);backdrop-filter:blur(4px)}
+.pill.gold{background:var(--gold);color:#fff}
+.pill.lock{background:var(--ink);color:#fff}
+.body{padding:18px 20px 16px;display:flex;flex-direction:column;flex:1}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:10px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink2)}
+.card h3{margin:0 0 7px;font-size:17.5px;line-height:1.4}
+.card p{margin:0 0 14px;font-size:14px;color:var(--ink2);flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;gap:6px 10px;flex-wrap:wrap;margin-bottom:14px}
+.tag{font-size:12px;color:var(--muted)}
+.tag::before{content:"#"}
+.foot{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed var(--line);padding-top:12px;font-size:12px;color:var(--muted)}
+.foot .cnt{display:flex;gap:12px}
+.grid.list .card{flex-direction:row}
+.grid.list .cover{width:200px;height:auto;min-height:130px;flex-shrink:0}
+.grid.list .card p{-webkit-line-clamp:2}
+mark{background:#ffe9a8;padding:0 2px;border-radius:3px}
+.empty{display:none;text-align:center;padding:80px 0;color:var(--muted)}
+.empty b{display:block;font-size:20px;color:var(--ink);margin-bottom:6px}
+.fav{position:absolute;top:10px;right:10px;border:0;background:rgba(255,255,255,.9);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.fav.on{color:#d2452f}
+
+/* ── 섹션 ── */
+.section{padding:56px 0;border-top:1px solid var(--line)}
+.section h2{font-size:28px;margin:0 0 10px}
+.section .sub{color:var(--muted);margin:0 0 28px;max-width:600px}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+@media(max-width:860px){.cols{grid-template-columns:1fr}}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steps li{display:flex;gap:14px;align-items:flex-start}
+.steps .n{width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:13px;flex-shrink:0}
+.form{display:grid;gap:12px}
+.form label{font-size:13px;color:var(--ink2);font-weight:500;display:grid;gap:6px}
+.form input,.form textarea,.form select{width:100%;padding:11px 13px;border:1px solid var(--line2);border-radius:10px;background:var(--paper);outline:none}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.form textarea{min-height:110px;resize:vertical}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .check{display:flex;align-items:center;gap:8px;font-size:14px}
+.form .check input{width:auto}
+.hint{font-size:12px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);background:var(--paper)}
+.foot-in{padding:36px 32px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);max-width:1200px;margin:0 auto}
+footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);margin-bottom:6px}
+
+/* ── 모달 ── */
+.overlay{position:fixed;inset:0;background:rgba(30,22,12,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;backdrop-filter:blur(3px)}
+.overlay.open{display:flex}
+.modal{background:var(--paper);border-radius:18px;width:100%;max-width:560px;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.25);animation:pop .18s ease}
+@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.modal.wide{max-width:820px}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.mh h3{margin:0;font-size:19px}
+.x{border:0;background:transparent;width:34px;height:34px;border-radius:8px;color:var(--muted);display:grid;place-items:center}
+.x:hover{background:var(--accent-soft);color:var(--accent)}
+.mb{padding:24px}
+.mf{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:-24px -24px 20px;padding:0 24px}
+.tabs button{border:0;background:transparent;padding:14px 4px;margin-right:18px;color:var(--muted);font-weight:500;border-bottom:2px solid transparent}
+.tabs button.on{color:var(--accent);border-color:var(--accent)}
+.detail-cover{height:220px;border-radius:12px;background:linear-gradient(135deg,#efe6d6,#f7f1e6);display:grid;place-items:center;overflow:hidden;margin-bottom:20px}
+.detail-cover img{width:100%;height:100%;object-fit:cover}
+.detail-cover .ty{font-family:"Noto Serif KR",serif;font-size:48px;font-weight:700;color:#b9a98a}
+.kv{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.kv div{background:var(--bg);border-radius:10px;padding:10px 12px}
+.kv span{display:block;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.kv b{font-size:14px}
+.notice{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--accent);display:flex;gap:10px;align-items:flex-start}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-size:14px;opacity:0;transition:.2s;z-index:200;pointer-events:none;box-shadow:var(--shadow)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.err{background:var(--bad)}
+.toast.ok{background:var(--ok)}
+
+/* ── 관리자 ── */
+.admin{position:fixed;inset:0;background:var(--bg);z-index:90;display:none;grid-template-columns:240px 1fr}
+.admin.open{display:grid}
+.side{background:var(--ink);color:#e9e2d4;padding:22px 14px;display:flex;flex-direction:column}
+.side .brand b{color:#fff}.side .brand span{color:#b9b0a0}
+.side nav{margin-top:28px;display:grid;gap:3px}
+.side nav button{border:0;background:transparent;color:#cfc6b4;text-align:left;padding:10px 12px;border-radius:9px;font-size:14px;display:flex;gap:10px;align-items:center}
+.side nav button:hover{background:rgba(255,255,255,.07);color:#fff}
+.side nav button.on{background:var(--accent);color:#fff}
+.side .bottom{margin-top:auto;display:grid;gap:4px}
+.side .bottom button{border:1px solid rgba(255,255,255,.15);background:transparent;color:#e9e2d4;padding:9px;border-radius:9px;font-size:13px}
+.pane{overflow:auto;padding:28px 36px}
+.pane h2{margin:0 0 4px;font-size:24px}
+.pane .sub{color:var(--muted);margin:0 0 22px;font-size:14px}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+@media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.admin{grid-template-columns:1fr}.side{display:none}}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tile span{font-size:12px;color:var(--muted)}
+.tile b{display:block;font-size:28px;font-family:"Noto Serif KR",serif;margin-top:4px}
+.tbl{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+.tbl th,.tbl td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl th{background:#f3eee2;font-weight:600;color:var(--ink2);font-size:12.5px;letter-spacing:.03em}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr:hover td{background:#fbf8f1}
+.tbl .acts{display:flex;gap:6px;justify-content:flex-end}
+.tbl .ttl{font-weight:600}
+.tbl .sub2{font-size:12px;color:var(--muted)}
+.card-form{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px;max-width:760px}
+.card-form h3{margin:0 0 16px;font-size:16px}
+.bilingual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bilingual label span.l{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-right:6px;vertical-align:middle}
+.drop{border:2px dashed var(--line2);border-radius:10px;padding:16px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer}
+.drop:hover{border-color:var(--accent);color:var(--accent)}
+.drop img{max-height:120px;border-radius:8px;display:block;margin:0 auto 8px}
+.status{font-size:12px;padding:2px 8px;border-radius:999px;font-weight:600}
+.status.new{background:#fde8c8;color:#9a5b00}.status.done{background:#dcefe2;color:var(--ok)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.swatch{width:18px;height:18px;border-radius:5px;display:inline-block;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.1)}
+.helpbox{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;max-width:760px;font-size:14px;color:var(--ink2)}
+.helpbox h4{margin:14px 0 6px;font-size:14px;color:var(--ink)}
+.helpbox h4:first-child{margin-top:0}
+.helpbox code{background:var(--accent-soft);padding:1px 6px;border-radius:5px;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ 헤더 ═══════════ -->
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#top"><div class="logo">K</div><div><b class="serif" data-site="name">Koinonia Archive</b><span data-site="tag">코이노니아 아카이브</span></div></a>
+    <div class="nav">
+      <a href="#archive" data-i="nav.archive">자료실</a>
+      <a href="#about" data-i="nav.about">소개</a>
+      <a href="#request" data-i="nav.request">자료 요청</a>
+      <div class="lang"><button data-lang="ko">KO</button><button data-lang="en">EN</button></div>
+      <div id="authArea" style="margin-left:8px"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ 히어로 ═══════════ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Koinonia · κοινωνία</p>
+    <h1 class="serif" data-i="hero.h1">지식은 나눌 때<br>비로소 모두의 것이 됩니다</h1>
+    <p class="lead" data-i="hero.lead">코이노니아는 교제와 나눔을 뜻하는 헬라어입니다. 이곳의 자료는 대가 없이 가져가 쓰시고, 필요하면 고쳐서 다시 나누어 주세요.</p>
+    <div class="motto"><span class="en">All is Yours</span><span class="ko" data-i="hero.motto">내가 가진 모든 지식과 자료가 곧 당신의 것</span></div>
+    <div class="stats">
+      <div class="stat"><b id="stItems">0</b><span data-i="stat.items">공유 자료</span></div>
+      <div class="stat"><b id="stCats">0</b><span data-i="stat.cats">카테고리</span></div>
+      <div class="stat"><b id="stDl">0</b><span data-i="stat.dl">누적 다운로드</span></div>
+      <div class="stat"><b id="stMem">0</b><span data-i="stat.mem">회원</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 툴바 + 목록 ═══════════ -->
+<section class="wrap toolbar" id="archive">
+  <div class="searchbox">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" data-ph="search.ph" placeholder="제목, 설명, 태그로 자료 검색" autocomplete="off">
+    <span class="kbd">/</span>
+  </div>
+  <div class="filters">
+    <div class="chips" id="chips"></div>
+    <div class="right">
+      <span id="count"></span>
+      <select class="sel" id="typeSel"></select>
+      <select class="sel" id="sort">
+        <option value="new" data-i="sort.new">최신순</option>
+        <option value="pop" data-i="sort.pop">인기순</option>
+        <option value="title" data-i="sort.title">제목순</option>
+      </select>
+      <div class="seg">
+        <button id="vGrid" class="on" title="Grid"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
+        <button id="vList" title="List"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty"><b data-i="empty.t">찾는 자료가 없습니다</b><span data-i="empty.s">검색어를 줄이거나 카테고리를 '전체'로 바꿔 보세요.</span></div>
+</main>
+
+<!-- ═══════════ 소개 / 요청 ═══════════ -->
+<section class="section" id="about">
+  <div class="wrap cols">
+    <div>
+      <h2 class="serif" data-i="about.h">이 아카이브에 대하여</h2>
+      <p class="sub" data-i="about.p">초대교회는 가진 것을 서로 통용했습니다. 지식도 그렇게 흘러야 한다고 믿습니다. 여기 올린 자료는 모두 직접 만들거나 정리한 것이며, 출처만 밝히면 어디서든 자유롭게 쓰실 수 있습니다.</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b data-i="about.s1">검색하고 고르세요</b><br><span class="hint" data-i="about.s1d">카테고리와 태그로 원하는 자료를 찾습니다.</span></div></li>
+        <li><span class="n">2</span><div><b data-i="about.s2">바로 내려받으세요</b><br><span class="hint" data-i="about.s2d">대부분 회원가입 없이 받을 수 있고, 일부 자료는 회원 전용입니다.</span></div></li>
+        <li><span class="n">3</span><div><b data-i="about.s3">고쳐서 다시 나누세요</b><br><span class="hint" data-i="about.s3d">더 나은 버전을 만들었다면 아래 '자료 요청'으로 알려 주세요.</span></div></li>
+      </ol>
+    </div>
+    <div id="request">
+      <h2 class="serif" data-i="req.h">자료 요청 · 제안</h2>
+      <p class="sub" data-i="req.p">필요한 자료가 있거나 오류를 발견하셨다면 남겨 주세요. 관리자가 확인합니다.</p>
+      <form class="form" id="reqForm">
+        <div class="row">
+          <label><span data-i="f.name">이름</span><input name="name" required></label>
+          <label><span data-i="f.email">이메일</span><input name="email" type="email" required></label>
+        </div>
+        <label><span data-i="f.msg">내용</span><textarea name="text" required></textarea></label>
+        <div><button class="btn primary" type="submit" data-i="req.send">보내기</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="fb" data-site="name">Koinonia Archive</div>
+      <div><span data-i="foot.contact">문의</span>: <a id="footMail" href="#">—</a></div>
+      <div style="margin-top:6px">© <span id="yr"></span> <span data-site="name">Koinonia Archive</span> · <span data-i="foot.lic">출처를 밝히고 자유롭게 사용하세요.</span></div>
+      <div style="margin-top:4px;font-size:12px">Open source · Code MIT · Materials CC BY 4.0 · Fonts <a href="https://fonts.google.com/" target="_blank" rel="noopener">Inter, Noto Sans/Serif KR</a> (SIL OFL)</div>
+    </div>
+    <div style="text-align:right"><span class="en serif" style="color:var(--accent);font-weight:700">All is Yours</span><br><span data-i="hero.motto">내가 가진 모든 지식과 자료가 곧 당신의 것</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ 모달: 자료 상세 ═══════════ -->
+<div class="overlay" id="mDetail"><div class="modal wide">
+  <div class="mh"><h3 id="dTitle" class="serif"></h3><button class="x" data-close>✕</button></div>
+  <div class="mb" id="dBody"></div>
+</div></div>
+
+<!-- ═══════════ 모달: 로그인/회원가입 ═══════════ -->
+<div class="overlay" id="mAuth"><div class="modal">
+  <div class="mh"><h3 data-i="auth.h">로그인 · 회원가입</h3><button class="x" data-close>✕</button></div>
+  <div class="mb">
+    <div class="tabs"><button class="on" data-tab="login" data-i="auth.login">로그인</button><button data-tab="signup" data-i="auth.signup">회원가입</button></div>
+    <form class="form" id="loginForm">
+      <label><span data-i="f.email">이메일</span><input name="email" type="text" inputmode="email" required autocomplete="username"></label>
+      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" required autocomplete="current-password"></label>
+      <button class="btn primary" type="submit" data-i="auth.login">로그인</button>
+    </form>
+    <form class="form hidden" id="signupForm">
+      <label><span data-i="f.name">이름</span><input name="name" required></label>
+      <label><span data-i="f.email">이메일</span><input name="email" type="email" required autocomplete="username"></label>
+      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" minlength="6" required autocomplete="new-password"></label>
+      <label class="check"><input type="checkbox" name="agree" required><span data-i="auth.agree">자료를 비상업적으로 사용하고 출처를 밝히는 데 동의합니다.</span></label>
+      <button class="btn primary" type="submit" data-i="auth.join">가입하기</button>
+    </form>
+    <p class="hint" style="margin:16px 0 0" data-i="auth.note">회원 정보는 이 사이트를 여는 기기(브라우저)에 저장됩니다.</p>
+  </div>
+</div></div>
+
+<!-- ═══════════ 모달: 확인 ═══════════ -->
+<div class="overlay" id="mConfirm"><div class="modal" style="max-width:420px">
+  <div class="mb"><h3 id="cTitle" style="margin:0 0 8px"></h3><p id="cText" style="margin:0;color:var(--ink2)"></p></div>
+  <div class="mf"><button class="btn" data-close data-i="btn.cancel">취소</button><button class="btn danger" id="cOk" data-i="btn.ok">확인</button></div>
+</div></div>
+
+<!-- ═══════════ 관리자 화면 ═══════════ -->
+<div class="admin" id="admin">
+  <aside class="side">
+    <a class="brand" href="#"><div class="logo">K</div><div><b class="serif">Admin</b><span data-i="adm.console">관리자 콘솔</span></div></a>
+    <nav id="adminNav">
+      <button data-pane="dash" class="on">📊 <span data-i="adm.dash">대시보드</span></button>
+      <button data-pane="items">📁 <span data-i="adm.items">자료 관리</span></button>
+      <button data-pane="cats">🏷️ <span data-i="adm.cats">카테고리</span></button>
+      <button data-pane="members">👥 <span data-i="adm.members">회원</span></button>
+      <button data-pane="reqs">✉️ <span data-i="adm.reqs">요청함</span></button>
+      <button data-pane="settings">⚙️ <span data-i="adm.settings">사이트 설정</span></button>
+      <button data-pane="backup">💾 <span data-i="adm.backup">백업 · 배포</span></button>
+      <button data-pane="help">❓ <span data-i="adm.help">도움말</span></button>
+    </nav>
+    <div class="bottom">
+      <button id="admExit" data-i="adm.exit">← 사이트로 돌아가기</button>
+    </div>
+  </aside>
+  <section class="pane" id="pane"></section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════ 초기 데이터 (관리자 화면에서 편집 → 배포용 HTML 생성 시 자동 갱신) ═══════════ -->
+<script id="seed" type="application/json">
+{"settings":{"name":"Koinonia Archive","tag":{"ko":"코이노니아 아카이브","en":"Koinonia Archive"},"email":"your-email@example.com","adminHash":"","allowSignup":true,"requireLoginAll":false,"lang":"ko"},
+"categories":[{"id":"bible","ko":"Bible","en":"Bible","color":"#8b4a2b"},{"id":"ai","ko":"AI","en":"AI","color":"#2f6f8f"},{"id":"books","ko":"Books","en":"Books","color":"#5b7a3a"},{"id":"etc","ko":"기타","en":"Others","color":"#857d6e"}],
+"items":[
+{"id":"i1","title":{"ko":"성경 연대기 요약","en":"Bible Chronology at a Glance"},"desc":{"ko":"창세기부터 계시록까지 사건의 흐름을 연대순으로 정리한 한 장 요약본입니다. 장·절 표기를 함께 달아 두어 본문을 바로 찾아갈 수 있습니다.","en":"A one-page chronological summary from Genesis to Revelation, with chapter and verse references so you can jump straight to the text."},"cat":"bible","tags":["연대기","요약","66권"],"date":"2026-10-28","type":"HTML","size":"120 KB","file":"files/bible-chronology.html","preview":"","members":false,"featured":true,"dl":42,"views":180,"cover":""},
+{"id":"i2","title":{"ko":"창세기 흐름식 정리","en":"Genesis: A Flow Study"},"desc":{"ko":"장과 절 단위로 따라가며 읽을 수 있게 만든 창세기 노트입니다.","en":"Study notes that follow Genesis chapter by chapter and verse by verse."},"cat":"bible","tags":["창세기","흐름식"],"date":"2026-10-20","type":"PDF","size":"1.2 MB","file":"files/genesis-flow.pdf","preview":"","members":false,"featured":false,"dl":18,"views":90,"cover":""},
+{"id":"i3","title":{"ko":"프롬프트 작성 입문","en":"Prompt Writing 101"},"desc":{"ko":"AI에게 일을 맡길 때 쓰는 질문 구조와 예시를 모은 입문 자료입니다.","en":"A beginner's guide to structuring requests for AI, with worked examples."},"cat":"ai","tags":["프롬프트","입문"],"date":"2026-11-05","type":"PDF","size":"860 KB","file":"files/prompt-basics.pdf","preview":"","members":false,"featured":true,"dl":67,"views":240,"cover":""},
+{"id":"i4","title":{"ko":"AI로 업무 자동화하기","en":"Automating Work with AI"},"desc":{"ko":"반복 업무를 AI와 간단한 HTML 도구로 줄여 본 사례 모음입니다.","en":"Case studies on cutting repetitive work with AI and small HTML tools."},"cat":"ai","tags":["자동화","사례"],"date":"2026-11-10","type":"PDF","size":"2.4 MB","file":"files/ai-automation.pdf","preview":"","members":true,"featured":false,"dl":12,"views":75,"cover":""},
+{"id":"i5","title":{"ko":"독서 노트 서식","en":"Reading Note Template"},"desc":{"ko":"읽은 책을 한 장으로 남기는 독서 노트 양식(인쇄용)입니다.","en":"A printable one-page template for recording each book you read."},"cat":"books","tags":["독서","양식"],"date":"2026-10-12","type":"DOCX","size":"45 KB","file":"files/reading-note.docx","preview":"","members":false,"featured":false,"dl":31,"views":110,"cover":""},
+{"id":"i6","title":{"ko":"올해의 책 12권","en":"12 Books of the Year"},"desc":{"ko":"올해 읽은 책 가운데 다시 펼쳐 볼 12권의 짧은 소개입니다.","en":"Short introductions to the twelve books worth reopening this year."},"cat":"books","tags":["추천","독서"],"date":"2026-11-01","type":"PDF","size":"1.8 MB","file":"files/books-of-year.pdf","preview":"","members":false,"featured":false,"dl":22,"views":98,"cover":""},
+{"id":"i7","title":{"ko":"HTML 한 장 문서 만들기","en":"Single-File HTML Documents"},"desc":{"ko":"보안 때문에 파일 공유가 어려울 때 HTML 한 파일로 문서를 배포하는 방법입니다.","en":"How to distribute documents as a single HTML file when file sharing is restricted."},"cat":"etc","tags":["HTML","공유"],"date":"2026-10-30","type":"HTML","size":"38 KB","file":"files/html-onepager.html","preview":"","members":false,"featured":false,"dl":9,"views":40,"cover":""}
+],
+"members":[],"requests":[]}
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   코이노니아 아카이브 — 앱 스크립트
+   저장소: localStorage (키 KA_DATA). 비어 있으면 위 seed 사용.
+   관리자 기본 비밀번호: admin1234 (설정에서 꼭 바꾸세요)
+   ═══════════════════════════════════════════════════════════ */
+const KEY="KA_DATA", SKEY="KA_SESSION", DEFAULT_ADMIN="admin1234";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+const today=()=>new Date().toISOString().slice(0,10);
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+
+/* ── 다국어 ── */
+const I18N={
+ko:{"nav.archive":"자료실","nav.about":"소개","nav.request":"자료 요청","hero.h1":"지식은 나눌 때<br>비로소 모두의 것이 됩니다","hero.lead":"코이노니아는 교제와 나눔을 뜻하는 헬라어입니다. 이곳의 자료는 대가 없이 가져가 쓰시고, 필요하면 고쳐서 다시 나누어 주세요.","hero.motto":"내가 가진 모든 지식과 자료가 곧 당신의 것","stat.items":"공유 자료","stat.cats":"카테고리","stat.dl":"누적 다운로드","stat.mem":"회원","search.ph":"제목, 설명, 태그로 자료 검색","sort.new":"최신순","sort.pop":"인기순","sort.title":"제목순","all":"전체","alltypes":"모든 형식","count":"자료 {n}건","empty.t":"찾는 자료가 없습니다","empty.s":"검색어를 줄이거나 카테고리를 '전체'로 바꿔 보세요.","about.h":"이 아카이브에 대하여","about.p":"초대교회는 가진 것을 서로 통용했습니다. 지식도 그렇게 흘러야 한다고 믿습니다. 여기 올린 자료는 모두 직접 만들거나 정리한 것이며, 출처만 밝히면 어디서든 자유롭게 쓰실 수 있습니다.","about.s1":"검색하고 고르세요","about.s1d":"카테고리와 태그로 원하는 자료를 찾습니다.","about.s2":"바로 내려받으세요","about.s2d":"대부분 회원가입 없이 받을 수 있고, 일부 자료는 회원 전용입니다.","about.s3":"고쳐서 다시 나누세요","about.s3d":"더 나은 버전을 만들었다면 아래 '자료 요청'으로 알려 주세요.","req.h":"자료 요청 · 제안","req.p":"필요한 자료가 있거나 오류를 발견하셨다면 남겨 주세요. 관리자가 확인합니다.","req.send":"보내기","req.ok":"접수되었습니다. 감사합니다!","f.name":"이름","f.email":"이메일","f.msg":"내용","f.pw":"비밀번호","foot.contact":"문의","foot.lic":"출처를 밝히고 자유롭게 사용하세요.","auth.h":"로그인 · 회원가입","auth.login":"로그인","auth.signup":"회원가입","auth.join":"가입하기","auth.agree":"자료를 비상업적으로 사용하고 출처를 밝히는 데 동의합니다.","auth.note":"회원 정보는 이 사이트를 여는 기기(브라우저)에 저장됩니다.","auth.welcome":"환영합니다, {n}님","auth.bye":"로그아웃되었습니다","auth.exists":"이미 가입된 이메일입니다","auth.bad":"이메일 또는 비밀번호가 맞지 않습니다","auth.closed":"현재 회원가입을 받지 않습니다","auth.logout":"로그아웃","auth.myfav":"내 즐겨찾기","auth.admin":"관리자 화면","auth.adminpw":"관리자 비밀번호","btn.cancel":"취소","btn.ok":"확인","btn.save":"저장","btn.add":"추가","btn.edit":"수정","btn.del":"삭제","btn.close":"닫기","d.download":"다운로드","d.preview":"미리보기","d.copy":"링크 복사","d.copied":"링크를 복사했습니다","d.members":"회원 전용 자료입니다. 로그인 후 내려받을 수 있습니다.","d.loginbtn":"로그인하고 받기","d.cat":"카테고리","d.type":"형식","d.size":"용량","d.date":"등록일","d.dl":"다운로드","d.views":"조회","d.related":"비슷한 자료","d.nofile":"파일 경로가 아직 등록되지 않았습니다.","featured":"추천","memonly":"회원전용","adm.console":"관리자 콘솔","adm.dash":"대시보드","adm.items":"자료 관리","adm.cats":"카테고리","adm.members":"회원","adm.reqs":"요청함","adm.settings":"사이트 설정","adm.backup":"백업 · 배포","adm.help":"도움말","adm.exit":"← 사이트로 돌아가기","adm.saved":"저장했습니다","adm.deleted":"삭제했습니다","adm.wrongpw":"관리자 비밀번호가 맞지 않습니다","adm.needcat":"카테고리를 사용하는 자료가 있어 삭제할 수 없습니다"},
+en:{"nav.archive":"Archive","nav.about":"About","nav.request":"Request","hero.h1":"Knowledge becomes<br>everyone's only when shared","hero.lead":"Koinonia is the Greek word for fellowship and sharing. Take what you need here freely, improve it if you can, and pass it on.","hero.motto":"All the knowledge and materials I have are yours","stat.items":"Resources","stat.cats":"Categories","stat.dl":"Downloads","stat.mem":"Members","search.ph":"Search by title, description or tag","sort.new":"Newest","sort.pop":"Most popular","sort.title":"Title A–Z","all":"All","alltypes":"All formats","count":"{n} resources","empty.t":"Nothing matched","empty.s":"Try a shorter query or switch the category to 'All'.","about.h":"About this archive","about.p":"The early church held everything in common. I believe knowledge should flow the same way. Everything here was made or compiled by me, and you may use it anywhere as long as you credit the source.","about.s1":"Search and choose","about.s1d":"Find what you need by category and tag.","about.s2":"Download right away","about.s2d":"Most files need no account; a few are members-only.","about.s3":"Improve and share back","about.s3d":"Made a better version? Tell me through the request form.","req.h":"Requests & suggestions","req.p":"Need a resource, or spotted an error? Leave a note and the admin will follow up.","req.send":"Send","req.ok":"Received. Thank you!","f.name":"Name","f.email":"Email","f.msg":"Message","f.pw":"Password","foot.contact":"Contact","foot.lic":"Use freely with attribution.","auth.h":"Sign in · Sign up","auth.login":"Sign in","auth.signup":"Sign up","auth.join":"Create account","auth.agree":"I agree to use the materials non-commercially and credit the source.","auth.note":"Account data is stored in the browser you use to open this site.","auth.welcome":"Welcome, {n}","auth.bye":"Signed out","auth.exists":"This email is already registered","auth.bad":"Email or password is incorrect","auth.closed":"Sign-ups are currently closed","auth.logout":"Sign out","auth.myfav":"My favorites","auth.admin":"Admin console","auth.adminpw":"Admin password","btn.cancel":"Cancel","btn.ok":"OK","btn.save":"Save","btn.add":"Add","btn.edit":"Edit","btn.del":"Delete","btn.close":"Close","d.download":"Download","d.preview":"Preview","d.copy":"Copy link","d.copied":"Link copied","d.members":"Members only. Sign in to download.","d.loginbtn":"Sign in to download","d.cat":"Category","d.type":"Format","d.size":"Size","d.date":"Added","d.dl":"Downloads","d.views":"Views","d.related":"Related","d.nofile":"No file path registered yet.","featured":"Featured","memonly":"Members","adm.console":"Admin console","adm.dash":"Dashboard","adm.items":"Resources","adm.cats":"Categories","adm.members":"Members","adm.reqs":"Inbox","adm.settings":"Site settings","adm.backup":"Backup · Deploy","adm.help":"Help","adm.exit":"← Back to site","adm.saved":"Saved","adm.deleted":"Deleted","adm.wrongpw":"Wrong admin password","adm.needcat":"Some resources still use this category"}
+};
+let LANG="ko";
+const t=(k,v={})=>{let s=(I18N[LANG]&&I18N[LANG][k])||I18N.ko[k]||k;for(const x in v)s=s.replace("{"+x+"}",v[x]);return s};
+const L=o=>typeof o==="string"?o:(o?.[LANG]||o?.ko||o?.en||"");
+
+/* ── 데이터 ── */
+let D;
+function load(){
+  const seed=JSON.parse($("#seed").textContent);
+  try{const s=localStorage.getItem(KEY);D=s?JSON.parse(s):seed}catch(e){D=seed}
+  D.settings={...seed.settings,...(D.settings||{})};
+  D.categories=D.categories||seed.categories;D.items=D.items||[];D.members=D.members||[];D.requests=D.requests||[];
+  LANG=localStorage.getItem("KA_LANG")||D.settings.lang||"ko";
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){toast("저장 공간이 부족합니다. 이미지 용량을 줄여 주세요.","err")}}
+let session=null;try{session=JSON.parse(localStorage.getItem(SKEY))}catch(e){}
+const setSession=s=>{session=s;try{s?localStorage.setItem(SKEY,JSON.stringify(s)):localStorage.removeItem(SKEY)}catch(e){}renderAuth()};
+const isAdmin=()=>session?.role==="admin";
+const me=()=>session&&D.members.find(m=>m.id===session.id);
+const cat=id=>D.categories.find(c=>c.id===id)||{ko:"—",en:"—",color:"#999"};
+
+/* ── 공용 UI ── */
+let toastT;function toast(msg,kind=""){const e=$("#toast");e.textContent=msg;e.className="toast show "+kind;clearTimeout(toastT);toastT=setTimeout(()=>e.className="toast",2200)}
+function open(id){$(id).classList.add("open")} function close(id){$(id).classList.remove("open")}
+$$("[data-close]").forEach(b=>b.addEventListener("click",()=>b.closest(".overlay").classList.remove("open")));
+$$(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("open")}));
+function confirmBox(title,text){return new Promise(res=>{$("#cTitle").textContent=title;$("#cText").textContent=text;open("#mConfirm");const ov=$("#mConfirm"),ok=$("#cOk");
+  const done=v=>{ok.removeEventListener("click",onOk);ov.removeEventListener("click",onCancel);close("#mConfirm");res(v)};
+  const onOk=()=>done(true);const onCancel=e=>{if(e.target===ov||e.target.closest("[data-close]"))done(false)};
+  ok.addEventListener("click",onOk);ov.addEventListener("click",onCancel)})}
+function applyI18n(){
+  document.documentElement.lang=LANG;
+  $$("[data-i]").forEach(e=>e.innerHTML=t(e.dataset.i));
+  $$("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));
+  $$("[data-lang]").forEach(b=>b.classList.toggle("on",b.dataset.lang===LANG));
+  $$("[data-site=name]").forEach(e=>e.textContent=D.settings.name);
+  $$("[data-site=tag]").forEach(e=>e.textContent=L(D.settings.tag));
+  $("#footMail").textContent=D.settings.email;$("#footMail").href="mailto:"+D.settings.email;
+  document.title=D.settings.name+" · "+L(D.settings.tag);
+}
+$$("[data-lang]").forEach(b=>b.addEventListener("click",()=>{LANG=b.dataset.lang;localStorage.setItem("KA_LANG",LANG);renderAll();if($("#admin").classList.contains("open"))showPane(curPane)}));
+
+/* ── 목록 ── */
+const state={cat:"all",q:"",sort:"new",type:"all",view:"grid"};
+const hi=(text,q)=>{const s=esc(text);if(!q)return s;return s.replace(new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi"),"<mark>$1</mark>")};
+function visibleItems(){return D.items}
+function renderChips(){
+  const all=[{id:"all",ko:t("all"),en:t("all"),color:""},...D.categories];
+  $("#chips").innerHTML=all.map(c=>{const n=c.id==="all"?D.items.length:D.items.filter(i=>i.cat===c.id).length;
+    return `<button class="chip ${state.cat===c.id?"on":""}" data-c="${c.id}">${c.color?`<span class="dot" style="background:${c.color}"></span>`:""}${esc(L(c))}<small>${n}</small></button>`}).join("");
+  const types=[...new Set(D.items.map(i=>i.type).filter(Boolean))].sort();
+  $("#typeSel").innerHTML=`<option value="all">${t("alltypes")}</option>`+types.map(x=>`<option ${state.type===x?"selected":""}>${esc(x)}</option>`).join("");
+}
+function favs(){const m=me();return m?.favs||[]}
+function renderGrid(){
+  const q=state.q.trim().toLowerCase();
+  let list=D.items.filter(i=>(state.cat==="all"||i.cat===state.cat)&&(state.type==="all"||i.type===state.type)&&(state.cat!=="fav"||favs().includes(i.id))
+    &&(!q||[L(i.title),L(i.desc),i.title?.ko,i.title?.en,L(cat(i.cat)),(i.tags||[]).join(" ")].join(" ").toLowerCase().includes(q)));
+  if(state.cat==="fav")list=D.items.filter(i=>favs().includes(i.id));
+  list.sort(state.sort==="new"?(a,b)=>(b.date||"").localeCompare(a.date||""):state.sort==="pop"?(a,b)=>(b.dl||0)-(a.dl||0):(a,b)=>L(a.title).localeCompare(L(b.title),LANG));
+  list.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
+  $("#count").textContent=t("count",{n:list.length});
+  $("#empty").style.display=list.length?"none":"block";
+  $("#grid").className="grid "+(state.view==="list"?"list":"");
+  $("#grid").innerHTML=list.map(i=>{const c=cat(i.cat);const f=favs().includes(i.id);return `
+  <article class="card" data-id="${i.id}">
+    <div class="cover">${i.cover?`<img src="${i.cover}" alt="">`:`<span class="ty">${esc(i.type||"FILE")}</span>`}
+      <div class="flag">${i.featured?`<span class="pill gold">★ ${t("featured")}</span>`:""}${i.members?`<span class="pill lock">🔒 ${t("memonly")}</span>`:""}</div>
+      ${me()?`<button class="fav ${f?"on":""}" data-fav="${i.id}" title="favorite">${f?"♥":"♡"}</button>`:""}
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:${c.color}"></span>${esc(L(c))}</span><span>${esc(i.date||"")}</span></div>
+      <h3 class="serif">${hi(L(i.title),q)}</h3>
+      <p>${hi(L(i.desc),q)}</p>
+      <div class="tags">${(i.tags||[]).map(x=>`<span class="tag">${hi(x,q)}</span>`).join("")}</div>
+      <div class="foot"><span>${esc(i.type||"")}${i.size?" · "+esc(i.size):""}</span><span class="cnt"><span>↓ ${i.dl||0}</span><span>👁 ${i.views||0}</span></span></div>
+    </div>
+  </article>`}).join("");
+}
+function renderStats(){
+  $("#stItems").textContent=D.items.length;$("#stCats").textContent=D.categories.length;
+  $("#stDl").textContent=D.items.reduce((a,i)=>a+(i.dl||0),0).toLocaleString();$("#stMem").textContent=D.members.length;
+}
+function renderAuth(){
+  const a=$("#authArea");const m=me();
+  if(isAdmin()){a.innerHTML=`<div class="menu" id="umenu"><button class="btn sm accent">⚙ ${t("auth.admin")}</button><div class="dd"><div class="who"><b>Administrator</b>${esc(D.settings.email)}</div><button data-act="admin">${t("auth.admin")}</button><button data-act="logout">${t("auth.logout")}</button></div></div>`}
+  else if(m){a.innerHTML=`<div class="menu" id="umenu"><button class="btn sm ghost"><span class="avatar">${esc(m.name[0]||"?")}</span>${esc(m.name)}</button><div class="dd"><div class="who"><b>${esc(m.name)}</b>${esc(m.email)}</div><button data-act="fav">♥ ${t("auth.myfav")}</button><button data-act="logout">${t("auth.logout")}</button></div></div>`}
+  else a.innerHTML=`<button class="btn sm primary" data-act="login">${t("auth.login")}</button>`;
+  a.querySelector(".menu button")?.addEventListener("click",e=>{e.stopPropagation();a.querySelector(".menu").classList.toggle("open")});
+  a.querySelectorAll("[data-act]").forEach(b=>b.addEventListener("click",e=>{const act=b.dataset.act;
+    if(act==="login")open("#mAuth");if(act==="logout"){setSession(null);toast(t("auth.bye"));renderGrid()}
+    if(act==="admin")openAdmin();if(act==="fav"){state.cat="fav";renderChips();renderGrid();location.hash="archive"}}));
+}
+document.addEventListener("click",()=>$$(".menu.open").forEach(m=>m.classList.remove("open")));
+function renderAll(){applyI18n();renderStats();renderChips();renderGrid();renderAuth()}
+
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;state.cat=b.dataset.c;renderChips();renderGrid()});
+$("#q").addEventListener("input",e=>{state.q=e.target.value;renderGrid()});
+$("#sort").addEventListener("change",e=>{state.sort=e.target.value;renderGrid()});
+$("#typeSel").addEventListener("change",e=>{state.type=e.target.value;renderGrid()});
+$("#vGrid").addEventListener("click",()=>{state.view="grid";$("#vGrid").classList.add("on");$("#vList").classList.remove("on");renderGrid()});
+$("#vList").addEventListener("click",()=>{state.view="list";$("#vList").classList.add("on");$("#vGrid").classList.remove("on");renderGrid()});
+document.addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&!$("#admin").classList.contains("open")){e.preventDefault();$("#q").focus()}
+  if(e.key==="Escape"){$$(".overlay.open").forEach(o=>o.classList.remove("open"))}});
+$("#grid").addEventListener("click",e=>{
+  const f=e.target.closest("[data-fav]");if(f){e.stopPropagation();const m=me();m.favs=m.favs||[];const i=m.favs.indexOf(f.dataset.fav);i>=0?m.favs.splice(i,1):m.favs.push(f.dataset.fav);save();renderGrid();return}
+  const c=e.target.closest(".card");if(c)openDetail(c.dataset.id);
+});
+
+/* ── 상세 ── */
+function openDetail(id){
+  const i=D.items.find(x=>x.id===id);if(!i)return;i.views=(i.views||0)+1;save();
+  const c=cat(i.cat);const locked=(i.members||D.settings.requireLoginAll)&&!me()&&!isAdmin();
+  const rel=D.items.filter(x=>x.id!==i.id&&(x.cat===i.cat||(x.tags||[]).some(tg=>(i.tags||[]).includes(tg)))).slice(0,3);
+  $("#dTitle").textContent=L(i.title);
+  $("#dBody").innerHTML=`
+    <div class="detail-cover">${i.cover?`<img src="${i.cover}" alt="">`:`<span class="ty">${esc(i.type||"FILE")}</span>`}</div>
+    <p style="margin:0 0 6px;font-size:15.5px;color:var(--ink2);white-space:pre-wrap">${esc(L(i.desc))}</p>
+    <div class="tags">${(i.tags||[]).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>
+    <div class="kv"><div><span>${t("d.cat")}</span><b>${esc(L(c))}</b></div><div><span>${t("d.type")}</span><b>${esc(i.type||"—")}</b></div><div><span>${t("d.size")}</span><b>${esc(i.size||"—")}</b></div><div><span>${t("d.date")}</span><b>${esc(i.date||"—")}</b></div></div>
+    ${locked?`<div class="notice">🔒 <div>${t("d.members")}<br><button class="btn sm primary" style="margin-top:8px" id="dLogin">${t("d.loginbtn")}</button></div></div>`:
+    `<div style="display:flex;gap:10px;flex-wrap:wrap">
+      ${i.file?`<a class="btn accent" id="dDl" href="${esc(i.file)}" download target="_blank" rel="noopener">⬇ ${t("d.download")}</a>`:`<span class="hint">${t("d.nofile")}</span>`}
+      ${(i.preview||(i.file&&/\.(html?|pdf)$/i.test(i.file)))?`<a class="btn" href="${esc(i.preview||i.file)}" target="_blank" rel="noopener">👁 ${t("d.preview")}</a>`:""}
+      <button class="btn" id="dCopy">🔗 ${t("d.copy")}</button>
+      <span class="hint" style="margin-left:auto;align-self:center">↓ ${i.dl||0} · 👁 ${i.views||0}</span>
+    </div>`}
+    ${rel.length?`<h4 style="margin:26px 0 10px;font-size:14px;color:var(--muted)">${t("d.related")}</h4><div style="display:grid;gap:8px">${rel.map(r=>`<button class="btn" style="justify-content:flex-start" data-rel="${r.id}"><span class="dot" style="background:${cat(r.cat).color}"></span>${esc(L(r.title))}<span class="hint" style="margin-left:auto">${esc(r.type||"")}</span></button>`).join("")}</div>`:""}`;
+  $("#dBody").querySelector("#dDl")?.addEventListener("click",()=>{i.dl=(i.dl||0)+1;save();renderStats();renderGrid()});
+  $("#dBody").querySelector("#dLogin")?.addEventListener("click",()=>{close("#mDetail");open("#mAuth")});
+  $("#dBody").querySelector("#dCopy")?.addEventListener("click",()=>{const u=location.href.split("#")[0]+"#item-"+i.id;navigator.clipboard?.writeText(u).then(()=>toast(t("d.copied"),"ok")).catch(()=>toast(u))});
+  $("#dBody").querySelectorAll("[data-rel]").forEach(b=>b.addEventListener("click",()=>openDetail(b.dataset.rel)));
+  open("#mDetail");
+}
+if(location.hash.startsWith("#item-"))setTimeout(()=>openDetail(location.hash.slice(6)),300);
+
+/* ── 인증 ── */
+$$("#mAuth [data-tab]").forEach(b=>b.addEventListener("click",()=>{$$("#mAuth [data-tab]").forEach(x=>x.classList.toggle("on",x===b));$("#loginForm").classList.toggle("hidden",b.dataset.tab!=="login");$("#signupForm").classList.toggle("hidden",b.dataset.tab!=="signup")}));
+$("#signupForm").addEventListener("submit",async e=>{e.preventDefault();const f=new FormData(e.target);
+  if(!D.settings.allowSignup)return toast(t("auth.closed"),"err");
+  const email=f.get("email").trim().toLowerCase();if(D.members.some(m=>m.email===email))return toast(t("auth.exists"),"err");
+  const m={id:uid(),name:f.get("name").trim(),email,hash:await sha(email+":"+f.get("pw")),joined:today(),favs:[]};D.members.push(m);save();
+  setSession({id:m.id,role:"member"});close("#mAuth");e.target.reset();toast(t("auth.welcome",{n:m.name}),"ok");renderAll()});
+$("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const f=new FormData(e.target);const email=f.get("email").trim().toLowerCase(),pw=f.get("pw");
+  const adminHash=D.settings.adminHash||await sha("admin:"+DEFAULT_ADMIN);
+  if(email===D.settings.email.toLowerCase()||email==="admin"){if(await sha("admin:"+pw)===adminHash){setSession({id:"admin",role:"admin"});close("#mAuth");e.target.reset();toast(t("auth.welcome",{n:"Admin"}),"ok");renderAll();return}}
+  const m=D.members.find(x=>x.email===email);
+  if(m&&m.hash===await sha(email+":"+pw)){setSession({id:m.id,role:"member"});close("#mAuth");e.target.reset();toast(t("auth.welcome",{n:m.name}),"ok");renderAll()}else toast(t("auth.bad"),"err")});
+$("#reqForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);D.requests.unshift({id:uid(),name:f.get("name"),email:f.get("email"),text:f.get("text"),date:today(),done:false});save();e.target.reset();toast(t("req.ok"),"ok")});
+
+/* ═══════════ 관리자 ═══════════ */
+let curPane="dash";
+function openAdmin(){$("#admin").classList.add("open");document.body.style.overflow="hidden";showPane("dash")}
+$("#admExit").addEventListener("click",()=>{$("#admin").classList.remove("open");document.body.style.overflow="";renderAll()});
+$("#adminNav").addEventListener("click",e=>{const b=e.target.closest("[data-pane]");if(b)showPane(b.dataset.pane)});
+function showPane(p){curPane=p;$$("#adminNav button").forEach(b=>b.classList.toggle("on",b.dataset.pane===p));$$("#adminNav [data-i]").forEach(e=>e.textContent=t(e.dataset.i));$("#admExit").textContent=t("adm.exit");PANES[p]()}
+const field=(label,name,val="",type="text",extra="")=>`<label>${label}<input name="${name}" type="${type}" value="${esc(val)}" ${extra}></label>`;
+const PANES={
+dash(){
+  const dl=D.items.reduce((a,i)=>a+(i.dl||0),0),vw=D.items.reduce((a,i)=>a+(i.views||0),0);
+  const top=[...D.items].sort((a,b)=>(b.dl||0)-(a.dl||0)).slice(0,5);const max=top[0]?.dl||1;
+  const byCat=D.categories.map(c=>({c,n:D.items.filter(i=>i.cat===c.id).length}));
+  $("#pane").innerHTML=`<h2>${t("adm.dash")}</h2><p class="sub">${D.settings.name} · ${today()}</p>
+  <div class="tiles"><div class="tile"><span>${t("stat.items")}</span><b>${D.items.length}</b></div><div class="tile"><span>${t("stat.dl")}</span><b>${dl}</b></div><div class="tile"><span>${t("d.views")}</span><b>${vw}</b></div><div class="tile"><span>${t("stat.mem")}</span><b>${D.members.length}</b></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="tile"><span>TOP 5 · ${t("d.dl")}</span><div style="display:grid;gap:10px;margin-top:12px">${top.map(i=>`<div><div style="display:flex;justify-content:space-between;font-size:13px"><span>${esc(L(i.title))}</span><b>${i.dl||0}</b></div><div class="bar"><i style="width:${(i.dl||0)/max*100}%"></i></div></div>`).join("")||"<span class='hint'>—</span>"}</div></div>
+    <div class="tile"><span>${t("adm.cats")}</span><div style="display:grid;gap:8px;margin-top:12px">${byCat.map(x=>`<div style="display:flex;justify-content:space-between;font-size:13px"><span><span class="swatch" style="background:${x.c.color}"></span>${esc(L(x.c))}</span><b>${x.n}</b></div>`).join("")}</div>
+      <span style="display:block;margin-top:18px">${t("adm.reqs")}</span><b style="font-size:22px">${D.requests.filter(r=>!r.done).length}</b> <span class="hint">new</span></div>
+  </div>
+  ${!D.settings.adminHash?`<div class="notice" style="margin-top:20px">⚠️ <div>관리자 비밀번호가 기본값(admin1234)입니다. <b>사이트 설정</b>에서 바꿔 주세요. / Admin password is still the default — change it in Settings.</div></div>`:""}`;
+},
+items(editId){
+  const ed=editId?D.items.find(i=>i.id===editId):null;
+  $("#pane").innerHTML=`<div class="ph"><div><h2>${t("adm.items")}</h2><p class="sub" style="margin:0">${D.items.length} items</p></div><button class="btn primary" id="newItem">+ ${t("btn.add")}</button></div>
+  <div id="itemForm" class="${ed||editId==="new"?"":"hidden"}"></div>
+  <table class="tbl" style="margin-top:18px"><thead><tr><th>#</th><th>Title</th><th>Cat</th><th>Type</th><th>Date</th><th>↓</th><th>👁</th><th></th></tr></thead><tbody>
+  ${D.items.map((i,n)=>`<tr><td class="sub2">${n+1}</td><td><div class="ttl">${esc(i.title.ko)}${i.featured?" ★":""}${i.members?" 🔒":""}</div><div class="sub2">${esc(i.title.en||"")}</div></td><td><span class="swatch" style="background:${cat(i.cat).color}"></span>${esc(cat(i.cat).ko)}</td><td>${esc(i.type||"")}</td><td class="sub2">${esc(i.date||"")}</td><td>${i.dl||0}</td><td>${i.views||0}</td>
+  <td><div class="acts"><button class="btn sm" data-edit="${i.id}">${t("btn.edit")}</button><button class="btn sm danger" data-del="${i.id}">${t("btn.del")}</button></div></td></tr>`).join("")}</tbody></table>`;
+  if(ed||editId==="new")itemForm(ed);
+  $("#newItem").addEventListener("click",()=>PANES.items("new"));
+  $$("#pane [data-edit]").forEach(b=>b.addEventListener("click",()=>{PANES.items(b.dataset.edit);$("#pane").scrollTop=0}));
+  $$("#pane [data-del]").forEach(b=>b.addEventListener("click",async()=>{if(await confirmBox(t("btn.del"),L(D.items.find(i=>i.id===b.dataset.del).title))){D.items=D.items.filter(i=>i.id!==b.dataset.del);save();toast(t("adm.deleted"));PANES.items()}}));
+},
+cats(){
+  $("#pane").innerHTML=`<h2>${t("adm.cats")}</h2><p class="sub">자료를 묶는 분류입니다. 색은 카드 배지에 쓰입니다.</p>
+  <table class="tbl" style="max-width:760px"><thead><tr><th>Color</th><th>KO</th><th>EN</th><th>ID</th><th>Items</th><th></th></tr></thead><tbody>
+  ${D.categories.map(c=>`<tr><td><input type="color" value="${c.color}" data-cc="${c.id}" style="width:36px;height:28px;border:0;background:none"></td><td><input value="${esc(c.ko)}" data-ck="${c.id}" style="width:140px"></td><td><input value="${esc(c.en)}" data-ce="${c.id}" style="width:140px"></td><td class="sub2">${c.id}</td><td>${D.items.filter(i=>i.cat===c.id).length}</td><td><div class="acts"><button class="btn sm danger" data-cd="${c.id}">${t("btn.del")}</button></div></td></tr>`).join("")}
+  <tr><td><input type="color" id="ncColor" value="#6b5b95" style="width:36px;height:28px;border:0;background:none"></td><td><input id="ncKo" placeholder="새 카테고리" style="width:140px"></td><td><input id="ncEn" placeholder="New category" style="width:140px"></td><td></td><td></td><td><div class="acts"><button class="btn sm primary" id="ncAdd">${t("btn.add")}</button></div></td></tr></tbody></table>
+  <div style="margin-top:14px"><button class="btn primary" id="catSave">${t("btn.save")}</button></div>`;
+  $("#catSave").addEventListener("click",()=>{D.categories.forEach(c=>{c.color=$(`[data-cc="${c.id}"]`).value;c.ko=$(`[data-ck="${c.id}"]`).value;c.en=$(`[data-ce="${c.id}"]`).value});save();toast(t("adm.saved"),"ok")});
+  $("#ncAdd").addEventListener("click",()=>{const ko=$("#ncKo").value.trim();if(!ko)return;D.categories.push({id:uid(),ko,en:$("#ncEn").value.trim()||ko,color:$("#ncColor").value});save();PANES.cats()});
+  $$("#pane [data-cd]").forEach(b=>b.addEventListener("click",async()=>{if(D.items.some(i=>i.cat===b.dataset.cd))return toast(t("adm.needcat"),"err");if(await confirmBox(t("btn.del"),cat(b.dataset.cd).ko)){D.categories=D.categories.filter(c=>c.id!==b.dataset.cd);save();PANES.cats()}}));
+},
+members(){
+  $("#pane").innerHTML=`<div class="ph"><div><h2>${t("adm.members")}</h2><p class="sub" style="margin:0">${D.members.length} members</p></div><button class="btn" id="memCsv">⬇ CSV</button></div>
+  <div class="notice" style="margin-bottom:16px;max-width:760px">ℹ️ <div>회원 정보는 각 방문자의 브라우저에 저장되며, 이 목록은 <b>이 브라우저</b>에서 가입한 회원만 보여 줍니다. 모든 기기의 회원을 한곳에서 보려면 Supabase 같은 무료 백엔드 연결이 필요합니다 (도움말 참고).</div></div>
+  <table class="tbl"><thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>♥</th><th></th></tr></thead><tbody>
+  ${D.members.map(m=>`<tr><td class="ttl">${esc(m.name)}</td><td>${esc(m.email)}</td><td class="sub2">${esc(m.joined)}</td><td>${(m.favs||[]).length}</td><td><div class="acts"><button class="btn sm danger" data-md="${m.id}">${t("btn.del")}</button></div></td></tr>`).join("")||`<tr><td colspan="5" class="sub2">—</td></tr>`}</tbody></table>`;
+  $$("#pane [data-md]").forEach(b=>b.addEventListener("click",async()=>{if(await confirmBox(t("btn.del"),"")){D.members=D.members.filter(m=>m.id!==b.dataset.md);save();PANES.members()}}));
+  $("#memCsv").addEventListener("click",()=>download("members.csv","name,email,joined\n"+D.members.map(m=>[m.name,m.email,m.joined].join(",")).join("\n"),"text/csv"));
+},
+reqs(){
+  $("#pane").innerHTML=`<h2>${t("adm.reqs")}</h2><p class="sub">${D.requests.filter(r=>!r.done).length} new / ${D.requests.length} total</p>
+  <div style="display:grid;gap:12px;max-width:820px">${D.requests.map(r=>`<div class="tile" style="display:flex;gap:16px;align-items:flex-start"><div style="flex:1"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px"><b>${esc(r.name)}</b><span class="hint">${esc(r.email)} · ${esc(r.date)}</span><span class="status ${r.done?"done":"new"}">${r.done?"DONE":"NEW"}</span></div><div style="white-space:pre-wrap;font-size:14px;color:var(--ink2)">${esc(r.text)}</div></div><div class="acts" style="display:flex;gap:6px"><button class="btn sm" data-rt="${r.id}">${r.done?"↺":"✓"}</button><button class="btn sm danger" data-rd="${r.id}">✕</button></div></div>`).join("")||"<span class='hint'>—</span>"}</div>`;
+  $$("#pane [data-rt]").forEach(b=>b.addEventListener("click",()=>{const r=D.requests.find(x=>x.id===b.dataset.rt);r.done=!r.done;save();PANES.reqs()}));
+  $$("#pane [data-rd]").forEach(b=>b.addEventListener("click",()=>{D.requests=D.requests.filter(x=>x.id!==b.dataset.rd);save();PANES.reqs()}));
+},
+settings(){
+  const s=D.settings;
+  $("#pane").innerHTML=`<h2>${t("adm.settings")}</h2><p class="sub">사이트 이름, 연락처, 접근 정책, 관리자 비밀번호</p>
+  <form class="form card-form" id="setForm">
+    ${field("사이트 이름 (영문 로고) / Site name","name",s.name)}
+    <div class="bilingual">${field('<span class="l">KO</span>부제','tagKo',s.tag.ko)}${field('<span class="l">EN</span>Subtitle','tagEn',s.tag.en)}</div>
+    ${field("관리자 이메일 (로그인 ID로도 사용) / Admin email","email",s.email,"email")}
+    <label>기본 언어 / Default language<select name="lang"><option value="ko" ${s.lang==="ko"?"selected":""}>한국어</option><option value="en" ${s.lang==="en"?"selected":""}>English</option></select></label>
+    <label class="check"><input type="checkbox" name="allowSignup" ${s.allowSignup?"checked":""}>회원가입 허용 / Allow sign-ups</label>
+    <label class="check"><input type="checkbox" name="requireLoginAll" ${s.requireLoginAll?"checked":""}>모든 자료를 회원 전용으로 / Require sign-in for all downloads</label>
+    <hr style="border:0;border-top:1px solid var(--line);margin:6px 0">
+    <h3>${t("auth.adminpw")}</h3>
+    <div class="row">${field("새 비밀번호 / New password","pw1","","password","minlength=6 autocomplete=new-password")}${field("확인 / Confirm","pw2","","password","autocomplete=new-password")}</div>
+    <span class="hint">비워 두면 비밀번호는 바뀌지 않습니다. 현재 ${s.adminHash?"사용자 지정 비밀번호":"기본값 admin1234"}.</span>
+    <div><button class="btn primary" type="submit">${t("btn.save")}</button></div>
+  </form>`;
+  $("#setForm").addEventListener("submit",async e=>{e.preventDefault();const f=new FormData(e.target);
+    s.name=f.get("name");s.tag={ko:f.get("tagKo"),en:f.get("tagEn")};s.email=f.get("email");s.lang=f.get("lang");s.allowSignup=!!f.get("allowSignup");s.requireLoginAll=!!f.get("requireLoginAll");
+    const p1=f.get("pw1"),p2=f.get("pw2");if(p1){if(p1!==p2)return toast("비밀번호 확인이 일치하지 않습니다","err");s.adminHash=await sha("admin:"+p1)}
+    save();toast(t("adm.saved"),"ok");PANES.settings()});
+},
+backup(){
+  $("#pane").innerHTML=`<h2>${t("adm.backup")}</h2><p class="sub">데이터를 내보내고, 다른 기기나 호스팅에 올릴 배포용 HTML을 만듭니다.</p>
+  <div style="display:grid;gap:16px;max-width:760px">
+    <div class="tile"><b style="font-size:16px;font-family:inherit">① 배포용 HTML 만들기 (가장 중요)</b><p class="hint" style="margin:6px 0 12px">지금 관리자 화면에서 고친 자료·카테고리·설정을 <b>HTML 파일 안에 새겨 넣은</b> 완성본을 내려받습니다. 이 파일을 GitHub Pages 등 호스팅에 올리면 모든 방문자가 같은 내용을 봅니다.</p><button class="btn accent" id="bHtml">⬇ index.html 내려받기</button> <button class="btn" id="bHtmlCopy">📋 HTML 복사</button></div>
+    <div class="tile"><b style="font-size:16px;font-family:inherit">② 데이터 백업 (JSON)</b><p class="hint" style="margin:6px 0 12px">자료·회원·요청 전체를 JSON으로 저장하거나 불러옵니다.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="bJson">⬇ JSON 내보내기</button><label class="btn">⬆ JSON 불러오기<input type="file" accept=".json" id="bImport" hidden></label><button class="btn danger" id="bReset">초기 데이터로 되돌리기</button></div></div>
+    <div class="tile"><b style="font-size:16px;font-family:inherit">③ 저장 공간</b><p class="hint" style="margin:6px 0 0" id="bSize"></p></div>
+  </div>`;
+  const size=new Blob([JSON.stringify(D)]).size;$("#bSize").textContent=`현재 데이터 ${(size/1024).toFixed(0)} KB (브라우저 한도 약 5 MB). 표지 이미지는 작게 넣어 주세요.`;
+  $("#bHtml").addEventListener("click",async()=>download("index.html",await buildHtml(),"text/html"));
+  $("#bHtmlCopy").addEventListener("click",async()=>{const h=await buildHtml();navigator.clipboard?.writeText(h).then(()=>toast("HTML을 복사했습니다. 편집기에 붙여 넣어 index.html로 저장하세요.","ok")).catch(()=>toast("복사 실패","err"))});
+  $("#bJson").addEventListener("click",()=>download("koinonia-backup-"+today()+".json",JSON.stringify(D,null,2),"application/json"));
+  $("#bImport").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.items)throw 0;D=d;save();load();toast("불러왔습니다","ok");PANES.backup()}catch(x){toast("올바른 백업 파일이 아닙니다","err")}};r.readAsText(f)});
+  $("#bReset").addEventListener("click",async()=>{if(await confirmBox("초기화","저장된 모든 변경 내용이 지워지고 HTML에 새겨진 초기 데이터로 돌아갑니다.")){localStorage.removeItem(KEY);load();toast("초기화했습니다");PANES.backup()}});
+},
+help(){
+  $("#pane").innerHTML=`<h2>${t("adm.help")}</h2><p class="sub">관리자 사용 설명서</p>
+  <div class="helpbox">
+    <h4>로그인</h4>사이트 오른쪽 위 <b>로그인</b>에서 이메일 칸에 <code>admin</code> 또는 설정한 관리자 이메일, 비밀번호에 관리자 비밀번호를 입력하면 관리자로 들어옵니다. 처음 비밀번호는 <code>admin1234</code>입니다.
+    <h4>자료 올리는 순서</h4>① 파일을 호스팅의 <code>files/</code> 폴더에 올립니다 (GitHub 저장소에 업로드). ② <b>자료 관리 → 추가</b>에서 제목·설명(한/영), 카테고리, 파일 경로(<code>files/이름.pdf</code>)를 적고 저장합니다. ③ <b>백업·배포 → index.html 내려받기</b>로 완성본을 받아 호스팅의 index.html을 교체합니다.
+    <h4>왜 ③이 필요한가요?</h4>이 사이트는 서버 없이 돌아가는 정적 페이지라, 관리자 화면의 변경은 우선 <b>지금 쓰는 브라우저</b>에만 저장됩니다. 배포용 HTML을 다시 올려야 모든 방문자가 같은 내용을 봅니다. 회원가입·요청함도 같은 이유로 방문자 각자의 브라우저에 남습니다.
+    <h4>모든 기기에서 회원·요청을 한곳에 모으려면</h4>Supabase, Firebase 같은 무료 백엔드를 연결하면 됩니다. 연결 지점은 스크립트의 <code>save()</code>, <code>load()</code>, 회원가입·로그인 함수 네 곳뿐이라 나중에 붙이기 쉽게 만들어 두었습니다.
+    <h4>GitHub Pages에 올리기</h4>① github.com 가입 → New repository (이름 예: <code>koinonia-archive</code>, Public). ② <b>Add file → Upload files</b>로 index.html과 files 폴더 업로드 → Commit. ③ Settings → Pages → Branch: <code>main</code> / (root) → Save. ④ 1~2분 뒤 <code>https://아이디.github.io/koinonia-archive/</code>에서 열립니다. 수정할 때는 index.html만 다시 업로드하면 됩니다.
+    <h4>단축키</h4><code>/</code> 검색창 포커스 · <code>Esc</code> 창 닫기
+  </div>`;
+}};
+function itemForm(ed){
+  const i=ed||{id:"",title:{ko:"",en:""},desc:{ko:"",en:""},cat:D.categories[0]?.id,tags:[],date:today(),type:"PDF",size:"",file:"",preview:"",members:false,featured:false,cover:""};
+  $("#itemForm").innerHTML=`<form class="form card-form" id="iform"><h3>${ed?t("btn.edit"):t("btn.add")}</h3>
+    <div class="bilingual">${field('<span class="l">KO</span>제목','tko',i.title.ko,"text","required")}${field('<span class="l">EN</span>Title','ten',i.title.en)}</div>
+    <div class="bilingual"><label><span class="l">KO</span>설명<textarea name="dko">${esc(i.desc.ko)}</textarea></label><label><span class="l">EN</span>Description<textarea name="den">${esc(i.desc.en)}</textarea></label></div>
+    <div class="row"><label>카테고리 / Category<select name="cat">${D.categories.map(c=>`<option value="${c.id}" ${c.id===i.cat?"selected":""}>${esc(c.ko)} / ${esc(c.en)}</option>`).join("")}</select></label>
+    ${field("태그 (쉼표로 구분) / Tags","tags",(i.tags||[]).join(", "))}</div>
+    <div class="row" style="grid-template-columns:1fr 1fr 1fr">${field("형식 / Type","type",i.type,"text","list=types")}<datalist id="types"><option>PDF<option>HTML<option>DOCX<option>XLSX<option>PPTX<option>ZIP<option>MP4<option>LINK</datalist>${field("용량 / Size","size",i.size)}${field("등록일 / Date","date",i.date,"date")}</div>
+    ${field("파일 경로 또는 URL / File path or URL","file",i.file,"text",'placeholder="files/example.pdf 또는 https://..."')}
+    ${field("미리보기 URL (선택) / Preview URL","preview",i.preview)}
+    <label>표지 이미지 (선택, 300KB 이하 권장) / Cover image<div class="drop" id="drop">${i.cover?`<img src="${i.cover}">`:""}<span>클릭해서 이미지 선택 · Click to choose</span><input type="file" accept="image/*" hidden id="coverIn"></div></label>
+    <div style="display:flex;gap:20px"><label class="check"><input type="checkbox" name="featured" ${i.featured?"checked":""}>★ ${t("featured")}</label><label class="check"><input type="checkbox" name="members" ${i.members?"checked":""}>🔒 ${t("memonly")}</label>${i.cover?`<label class="check"><input type="checkbox" name="rmcover">표지 삭제</label>`:""}</div>
+    <div style="display:flex;gap:8px"><button class="btn primary" type="submit">${t("btn.save")}</button><button class="btn" type="button" id="iCancel">${t("btn.cancel")}</button></div></form>`;
+  let cover=i.cover;
+  $("#drop").addEventListener("click",()=>$("#coverIn").click());
+  $("#coverIn").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;const img=new Image();const r=new FileReader();r.onload=()=>{img.onload=()=>{const c=document.createElement("canvas");const sc=Math.min(1,640/img.width);c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);cover=c.toDataURL("image/jpeg",.78);$("#drop").innerHTML=`<img src="${cover}"><span>${(cover.length*0.75/1024).toFixed(0)} KB</span>`};img.src=r.result};r.readAsDataURL(f)});
+  $("#iCancel").addEventListener("click",()=>PANES.items());
+  $("#iform").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);
+    const o={id:i.id||uid(),title:{ko:f.get("tko").trim(),en:f.get("ten").trim()},desc:{ko:f.get("dko").trim(),en:f.get("den").trim()},cat:f.get("cat"),tags:f.get("tags").split(",").map(s=>s.trim()).filter(Boolean),type:f.get("type").trim().toUpperCase(),size:f.get("size").trim(),date:f.get("date"),file:f.get("file").trim(),preview:f.get("preview").trim(),featured:!!f.get("featured"),members:!!f.get("members"),cover:f.get("rmcover")?"":cover,dl:i.dl||0,views:i.views||0};
+    if(ed){Object.assign(ed,o)}else D.items.unshift(o);save();toast(t("adm.saved"),"ok");PANES.items()});
+}
+/* 배포용 HTML: 현재 페이지 소스를 가져와 seed 블록만 교체 */
+async function buildHtml(){
+  let src="";try{src=await (await fetch(location.href.split("#")[0],{cache:"no-store"})).text()}catch(e){}
+  if(!src||!src.includes('id="seed"')){src="<!DOCTYPE html>\n"+document.documentElement.outerHTML}
+  const clean={...D,members:[],requests:[]};clean.settings={...D.settings};
+  const json=JSON.stringify(clean).replace(/<\/script/gi,"<\\/script");
+  return src.replace(/(<script id="seed" type="application\/json">)[\s\S]*?(<\/script>)/,`$1\n${json}\n$2`);
+}
+async function download(name,data,mime){
+  const blob=new Blob([data],{type:mime});
+  try{const dl=window.claude&&await window.claude.use("downloads");if(dl){await dl.save({filename:name,data:blob});return}}catch(e){}
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+
+/* ── 시작 ── */
+load();$("#yr").textContent=new Date().getFullYear();renderAll();
+</script>
+</body>
+</html>
