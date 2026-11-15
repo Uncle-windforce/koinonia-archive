@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Koinonia Archive · 코이노니아 아카이브</title>
 <meta name="description" content="All is Yours — 내가 가진 모든 지식과 자료가 곧 당신의 것">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=Noto+Serif+KR:wght@500;700&amp;display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f7f4ec;--paper:#fffdf9;--ink:#26221c;--ink2:#4d4639;--muted:#857d6e;--line:#e5ddcc;--line2:#d7cdb6;
@@ -225,7 +224,7 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
 .helpbox code{background:var(--accent-soft);padding:1px 6px;border-radius:5px;font-size:12.5px}
 </style>
 </head>
-<body>
+<body style="overflow: hidden;">
 
 <!-- ═══════════ 헤더 ═══════════ -->
 <header class="top">
@@ -235,8 +234,8 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
       <a href="#archive" data-i="nav.archive">자료실</a>
       <a href="#about" data-i="nav.about">소개</a>
       <a href="#request" data-i="nav.request">자료 요청</a>
-      <div class="lang"><button data-lang="ko">KO</button><button data-lang="en">EN</button></div>
-      <div id="authArea" style="margin-left:8px"></div>
+      <div class="lang"><button data-lang="ko" class="on">KO</button><button data-lang="en">EN</button></div>
+      <div id="authArea" style="margin-left:8px"><div class="menu" id="umenu"><button class="btn sm accent">⚙ 관리자 화면</button><div class="dd"><div class="who"><b>Administrator</b>honghoon69@gmail.com</div><button data-act="admin">관리자 화면</button><button data-act="logout">로그아웃</button></div></div></div>
     </div>
   </div>
 </header>
@@ -249,9 +248,9 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
     <p class="lead" data-i="hero.lead">코이노니아는 교제와 나눔을 뜻하는 헬라어입니다. 이곳의 자료는 대가 없이 가져가 쓰시고, 필요하면 고쳐서 다시 나누어 주세요.</p>
     <div class="motto"><span class="en">All is Yours</span><span class="ko" data-i="hero.motto">내가 가진 모든 지식과 자료가 곧 당신의 것</span></div>
     <div class="stats">
-      <div class="stat"><b id="stItems">0</b><span data-i="stat.items">공유 자료</span></div>
-      <div class="stat"><b id="stCats">0</b><span data-i="stat.cats">카테고리</span></div>
-      <div class="stat"><b id="stDl">0</b><span data-i="stat.dl">누적 다운로드</span></div>
+      <div class="stat"><b id="stItems">7</b><span data-i="stat.items">공유 자료</span></div>
+      <div class="stat"><b id="stCats">4</b><span data-i="stat.cats">카테고리</span></div>
+      <div class="stat"><b id="stDl">201</b><span data-i="stat.dl">누적 다운로드</span></div>
       <div class="stat"><b id="stMem">0</b><span data-i="stat.mem">회원</span></div>
     </div>
   </div>
@@ -260,30 +259,121 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
 <!-- ═══════════ 툴바 + 목록 ═══════════ -->
 <section class="wrap toolbar" id="archive">
   <div class="searchbox">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
     <input id="q" type="search" data-ph="search.ph" placeholder="제목, 설명, 태그로 자료 검색" autocomplete="off">
     <span class="kbd">/</span>
   </div>
   <div class="filters">
-    <div class="chips" id="chips"></div>
+    <div class="chips" id="chips"><button class="chip on" data-c="all">전체<small>7</small></button><button class="chip " data-c="bible"><span class="dot" style="background:#8b4a2b"></span>Bible<small>2</small></button><button class="chip " data-c="ai"><span class="dot" style="background:#2f6f8f"></span>AI<small>2</small></button><button class="chip " data-c="books"><span class="dot" style="background:#5b7a3a"></span>Books<small>2</small></button><button class="chip " data-c="etc"><span class="dot" style="background:#857d6e"></span>기타<small>1</small></button></div>
     <div class="right">
-      <span id="count"></span>
-      <select class="sel" id="typeSel"></select>
+      <span id="count">자료 7건</span>
+      <select class="sel" id="typeSel"><option value="all">모든 형식</option><option>DOCX</option><option>HTML</option><option>PDF</option></select>
       <select class="sel" id="sort">
         <option value="new" data-i="sort.new">최신순</option>
         <option value="pop" data-i="sort.pop">인기순</option>
         <option value="title" data-i="sort.title">제목순</option>
       </select>
       <div class="seg">
-        <button id="vGrid" class="on" title="Grid"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
-        <button id="vList" title="List"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg></button>
+        <button id="vGrid" class="on" title="Grid"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"></rect><rect x="13" y="3" width="8" height="8" rx="1.5"></rect><rect x="3" y="13" width="8" height="8" rx="1.5"></rect><rect x="13" y="13" width="8" height="8" rx="1.5"></rect></svg></button>
+        <button id="vList" title="List"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="10" width="18" height="4" rx="1.5"></rect><rect x="3" y="16" width="18" height="4" rx="1.5"></rect></svg></button>
       </div>
     </div>
   </div>
 </section>
 <main class="wrap">
-  <div class="grid" id="grid"></div>
-  <div class="empty" id="empty"><b data-i="empty.t">찾는 자료가 없습니다</b><span data-i="empty.s">검색어를 줄이거나 카테고리를 '전체'로 바꿔 보세요.</span></div>
+  <div class="grid " id="grid">
+  <article class="card" data-id="i3">
+    <div class="cover"><span class="ty">PDF</span>
+      <div class="flag"><span class="pill gold">★ 추천</span></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#2f6f8f"></span>AI</span><span>2026-11-05</span></div>
+      <h3 class="serif">프롬프트 작성 입문</h3>
+      <p>AI에게 일을 맡길 때 쓰는 질문 구조와 예시를 모은 입문 자료입니다.</p>
+      <div class="tags"><span class="tag">프롬프트</span><span class="tag">입문</span></div>
+      <div class="foot"><span>PDF · 860 KB</span><span class="cnt"><span>↓ 67</span><span>👁 240</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i1">
+    <div class="cover"><span class="ty">HTML</span>
+      <div class="flag"><span class="pill gold">★ 추천</span></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#8b4a2b"></span>Bible</span><span>2026-10-28</span></div>
+      <h3 class="serif">성경 연대기 요약</h3>
+      <p>창세기부터 계시록까지 사건의 흐름을 연대순으로 정리한 한 장 요약본입니다. 장·절 표기를 함께 달아 두어 본문을 바로 찾아갈 수 있습니다.</p>
+      <div class="tags"><span class="tag">연대기</span><span class="tag">요약</span><span class="tag">66권</span></div>
+      <div class="foot"><span>HTML · 120 KB</span><span class="cnt"><span>↓ 42</span><span>👁 182</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i4">
+    <div class="cover"><span class="ty">PDF</span>
+      <div class="flag"><span class="pill lock">🔒 회원전용</span></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#2f6f8f"></span>AI</span><span>2026-11-10</span></div>
+      <h3 class="serif">AI로 업무 자동화하기</h3>
+      <p>반복 업무를 AI와 간단한 HTML 도구로 줄여 본 사례 모음입니다.</p>
+      <div class="tags"><span class="tag">자동화</span><span class="tag">사례</span></div>
+      <div class="foot"><span>PDF · 2.4 MB</span><span class="cnt"><span>↓ 12</span><span>👁 75</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i6">
+    <div class="cover"><span class="ty">PDF</span>
+      <div class="flag"></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#5b7a3a"></span>Books</span><span>2026-11-01</span></div>
+      <h3 class="serif">올해의 책 12권</h3>
+      <p>올해 읽은 책 가운데 다시 펼쳐 볼 12권의 짧은 소개입니다.</p>
+      <div class="tags"><span class="tag">추천</span><span class="tag">독서</span></div>
+      <div class="foot"><span>PDF · 1.8 MB</span><span class="cnt"><span>↓ 22</span><span>👁 98</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i7">
+    <div class="cover"><span class="ty">HTML</span>
+      <div class="flag"></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#857d6e"></span>기타</span><span>2026-10-30</span></div>
+      <h3 class="serif">HTML 한 장 문서 만들기</h3>
+      <p>보안 때문에 파일 공유가 어려울 때 HTML 한 파일로 문서를 배포하는 방법입니다.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">공유</span></div>
+      <div class="foot"><span>HTML · 38 KB</span><span class="cnt"><span>↓ 9</span><span>👁 40</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i2">
+    <div class="cover"><span class="ty">PDF</span>
+      <div class="flag"></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#8b4a2b"></span>Bible</span><span>2026-10-20</span></div>
+      <h3 class="serif">창세기 흐름식 정리</h3>
+      <p>장과 절 단위로 따라가며 읽을 수 있게 만든 창세기 노트입니다.</p>
+      <div class="tags"><span class="tag">창세기</span><span class="tag">흐름식</span></div>
+      <div class="foot"><span>PDF · 1.2 MB</span><span class="cnt"><span>↓ 18</span><span>👁 91</span></span></div>
+    </div>
+  </article>
+  <article class="card" data-id="i5">
+    <div class="cover"><span class="ty">DOCX</span>
+      <div class="flag"></div>
+      
+    </div>
+    <div class="body">
+      <div class="meta"><span class="badge"><span class="dot" style="background:#5b7a3a"></span>Books</span><span>2026-10-12</span></div>
+      <h3 class="serif">독서 노트 서식</h3>
+      <p>읽은 책을 한 장으로 남기는 독서 노트 양식(인쇄용)입니다.</p>
+      <div class="tags"><span class="tag">독서</span><span class="tag">양식</span></div>
+      <div class="foot"><span>DOCX · 45 KB</span><span class="cnt"><span>↓ 31</span><span>👁 110</span></span></div>
+    </div>
+  </article></div>
+  <div class="empty" id="empty" style="display: none;"><b data-i="empty.t">찾는 자료가 없습니다</b><span data-i="empty.s">검색어를 줄이거나 카테고리를 '전체'로 바꿔 보세요.</span></div>
 </main>
 
 <!-- ═══════════ 소개 / 요청 ═══════════ -->
@@ -303,10 +393,10 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
       <p class="sub" data-i="req.p">필요한 자료가 있거나 오류를 발견하셨다면 남겨 주세요. 관리자가 확인합니다.</p>
       <form class="form" id="reqForm">
         <div class="row">
-          <label><span data-i="f.name">이름</span><input name="name" required></label>
-          <label><span data-i="f.email">이메일</span><input name="email" type="email" required></label>
+          <label><span data-i="f.name">이름</span><input name="name" required=""></label>
+          <label><span data-i="f.email">이메일</span><input name="email" type="email" required=""></label>
         </div>
-        <label><span data-i="f.msg">내용</span><textarea name="text" required></textarea></label>
+        <label><span data-i="f.msg">내용</span><textarea name="text" required=""></textarea></label>
         <div><button class="btn primary" type="submit" data-i="req.send">보내기</button></div>
       </form>
     </div>
@@ -317,8 +407,8 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
   <div class="foot-in">
     <div>
       <div class="fb" data-site="name">Koinonia Archive</div>
-      <div><span data-i="foot.contact">문의</span>: <a id="footMail" href="#">—</a></div>
-      <div style="margin-top:6px">© <span id="yr"></span> <span data-site="name">Koinonia Archive</span> · <span data-i="foot.lic">출처를 밝히고 자유롭게 사용하세요.</span></div>
+      <div><span data-i="foot.contact">문의</span>: <a id="footMail" href="mailto:honghoon69@gmail.com">honghoon69@gmail.com</a></div>
+      <div style="margin-top:6px">© <span id="yr">2026</span> <span data-site="name">Koinonia Archive</span> · <span data-i="foot.lic">출처를 밝히고 자유롭게 사용하세요.</span></div>
       <div style="margin-top:4px;font-size:12px">Open source · Code MIT · Materials CC BY 4.0 · Fonts <a href="https://fonts.google.com/" target="_blank" rel="noopener">Inter, Noto Sans/Serif KR</a> (SIL OFL)</div>
     </div>
     <div style="text-align:right"><span class="en serif" style="color:var(--accent);font-weight:700">All is Yours</span><br><span data-i="hero.motto">내가 가진 모든 지식과 자료가 곧 당신의 것</span></div>
@@ -327,25 +417,25 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
 
 <!-- ═══════════ 모달: 자료 상세 ═══════════ -->
 <div class="overlay" id="mDetail"><div class="modal wide">
-  <div class="mh"><h3 id="dTitle" class="serif"></h3><button class="x" data-close>✕</button></div>
+  <div class="mh"><h3 id="dTitle" class="serif"></h3><button class="x" data-close="">✕</button></div>
   <div class="mb" id="dBody"></div>
 </div></div>
 
 <!-- ═══════════ 모달: 로그인/회원가입 ═══════════ -->
 <div class="overlay" id="mAuth"><div class="modal">
-  <div class="mh"><h3 data-i="auth.h">로그인 · 회원가입</h3><button class="x" data-close>✕</button></div>
+  <div class="mh"><h3 data-i="auth.h">로그인 · 회원가입</h3><button class="x" data-close="">✕</button></div>
   <div class="mb">
     <div class="tabs"><button class="on" data-tab="login" data-i="auth.login">로그인</button><button data-tab="signup" data-i="auth.signup">회원가입</button></div>
     <form class="form" id="loginForm">
-      <label><span data-i="f.email">이메일</span><input name="email" type="text" inputmode="email" required autocomplete="username"></label>
-      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" required autocomplete="current-password"></label>
+      <label><span data-i="f.email">이메일</span><input name="email" type="text" inputmode="email" required="" autocomplete="username"></label>
+      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" required="" autocomplete="current-password"></label>
       <button class="btn primary" type="submit" data-i="auth.login">로그인</button>
     </form>
     <form class="form hidden" id="signupForm">
-      <label><span data-i="f.name">이름</span><input name="name" required></label>
-      <label><span data-i="f.email">이메일</span><input name="email" type="email" required autocomplete="username"></label>
-      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" minlength="6" required autocomplete="new-password"></label>
-      <label class="check"><input type="checkbox" name="agree" required><span data-i="auth.agree">자료를 비상업적으로 사용하고 출처를 밝히는 데 동의합니다.</span></label>
+      <label><span data-i="f.name">이름</span><input name="name" required=""></label>
+      <label><span data-i="f.email">이메일</span><input name="email" type="email" required="" autocomplete="username"></label>
+      <label><span data-i="f.pw">비밀번호</span><input name="pw" type="password" minlength="6" required="" autocomplete="new-password"></label>
+      <label class="check"><input type="checkbox" name="agree" required=""><span data-i="auth.agree">자료를 비상업적으로 사용하고 출처를 밝히는 데 동의합니다.</span></label>
       <button class="btn primary" type="submit" data-i="auth.join">가입하기</button>
     </form>
     <p class="hint" style="margin:16px 0 0" data-i="auth.note">회원 정보는 이 사이트를 여는 기기(브라우저)에 저장됩니다.</p>
@@ -355,35 +445,40 @@ footer .fb{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--ink);mar
 <!-- ═══════════ 모달: 확인 ═══════════ -->
 <div class="overlay" id="mConfirm"><div class="modal" style="max-width:420px">
   <div class="mb"><h3 id="cTitle" style="margin:0 0 8px"></h3><p id="cText" style="margin:0;color:var(--ink2)"></p></div>
-  <div class="mf"><button class="btn" data-close data-i="btn.cancel">취소</button><button class="btn danger" id="cOk" data-i="btn.ok">확인</button></div>
+  <div class="mf"><button class="btn" data-close="" data-i="btn.cancel">취소</button><button class="btn danger" id="cOk" data-i="btn.ok">확인</button></div>
 </div></div>
 
 <!-- ═══════════ 관리자 화면 ═══════════ -->
-<div class="admin" id="admin">
+<div class="admin open" id="admin">
   <aside class="side">
     <a class="brand" href="#"><div class="logo">K</div><div><b class="serif">Admin</b><span data-i="adm.console">관리자 콘솔</span></div></a>
     <nav id="adminNav">
-      <button data-pane="dash" class="on">📊 <span data-i="adm.dash">대시보드</span></button>
+      <button data-pane="dash" class="">📊 <span data-i="adm.dash">대시보드</span></button>
       <button data-pane="items">📁 <span data-i="adm.items">자료 관리</span></button>
       <button data-pane="cats">🏷️ <span data-i="adm.cats">카테고리</span></button>
       <button data-pane="members">👥 <span data-i="adm.members">회원</span></button>
       <button data-pane="reqs">✉️ <span data-i="adm.reqs">요청함</span></button>
       <button data-pane="settings">⚙️ <span data-i="adm.settings">사이트 설정</span></button>
-      <button data-pane="backup">💾 <span data-i="adm.backup">백업 · 배포</span></button>
+      <button data-pane="backup" class="on">💾 <span data-i="adm.backup">백업 · 배포</span></button>
       <button data-pane="help">❓ <span data-i="adm.help">도움말</span></button>
     </nav>
     <div class="bottom">
       <button id="admExit" data-i="adm.exit">← 사이트로 돌아가기</button>
     </div>
   </aside>
-  <section class="pane" id="pane"></section>
+  <section class="pane" id="pane"><h2>백업 · 배포</h2><p class="sub">데이터를 내보내고, 다른 기기나 호스팅에 올릴 배포용 HTML을 만듭니다.</p>
+  <div style="display:grid;gap:16px;max-width:760px">
+    <div class="tile"><b style="font-size:16px;font-family:inherit">① 배포용 HTML 만들기 (가장 중요)</b><p class="hint" style="margin:6px 0 12px">지금 관리자 화면에서 고친 자료·카테고리·설정을 <b>HTML 파일 안에 새겨 넣은</b> 완성본을 내려받습니다. 이 파일을 GitHub Pages 등 호스팅에 올리면 모든 방문자가 같은 내용을 봅니다.</p><button class="btn accent" id="bHtml">⬇ index.html 내려받기</button> <button class="btn" id="bHtmlCopy">📋 HTML 복사</button></div>
+    <div class="tile"><b style="font-size:16px;font-family:inherit">② 데이터 백업 (JSON)</b><p class="hint" style="margin:6px 0 12px">자료·회원·요청 전체를 JSON으로 저장하거나 불러옵니다.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="bJson">⬇ JSON 내보내기</button><label class="btn">⬆ JSON 불러오기<input type="file" accept=".json" id="bImport" hidden=""></label><button class="btn danger" id="bReset">초기 데이터로 되돌리기</button></div></div>
+    <div class="tile"><b style="font-size:16px;font-family:inherit">③ 저장 공간</b><p class="hint" style="margin:6px 0 0" id="bSize">현재 데이터 4 KB (브라우저 한도 약 5 MB). 표지 이미지는 작게 넣어 주세요.</p></div>
+  </div></section>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <!-- ═══════════ 초기 데이터 (관리자 화면에서 편집 → 배포용 HTML 생성 시 자동 갱신) ═══════════ -->
 <script id="seed" type="application/json">
-{"settings":{"name":"Koinonia Archive","tag":{"ko":"코이노니아 아카이브","en":"Koinonia Archive"},"email":"honghoon69@gmail.com","adminHash":"37b0ae4a351202090d5cbe9e043ce06d7c6b74c42e8f79279025c0b0eb161bef","allowSignup":true,"requireLoginAll":false,"lang":"ko"},"categories":[{"id":"bible","ko":"Bible","en":"Bible","color":"#8b4a2b"},{"id":"ai","ko":"AI","en":"AI","color":"#2f6f8f"},{"id":"books","ko":"Books","en":"Books","color":"#5b7a3a"},{"id":"etc","ko":"기타","en":"Others","color":"#857d6e"}],"items":[{"id":"0q9ue0c5g0","title":{"ko":"개역한글성경_저작권만료","en":"KOREAN_Bible"},"desc":{"ko":"개역한글성경_저작권만료 PDF를 첨가합니다.성경 연대기 (한국어판) HTML 파일을 받으신 후 개역한글성경_저작권만료 성경을 추가하셔야 성경구절이 보여 좀 더 \n성경공부에 도움이 되실 수 있습니다.","en":""},"cat":"bible","tags":[],"type":"PDF","size":"8.21 MB","date":"2026-11-15","file":"","preview":"","featured":false,"members":false,"cover":"","dl":0,"views":0},{"id":"i8","title":{"ko":"성경 연대기 (한국어판)","en":"Bible Chronicle (Korean edition)"},"desc":{"ko":"창세기부터 계시록까지 인물 생애·66권 흐름·전쟁·나라·지도·성막 문화를 한곳에서 보는 성경 연대기 앱입니다. 파일 하나로 인터넷 없이도 열립니다(성경 본문은 들어 있지 않고, 내려받은 뒤 본인의 성경 PDF를 불러와 사용). 라이선스: 직접 만든 부분은 MIT, 포함된 오픈소스는 각자의 라이선스를 따릅니다(앱 안 ‘오픈소스 라이선스’ 화면 참고).","en":"A Bible chronicle app covering people's life stories, the flow of all 66 books, wars, nations, maps, and tabernacle culture in one place, from Genesis to Revelation. It opens from a single file, even offline (Korean interface; it does not contain Bible text — load your own Bible PDF after downloading). License: original parts MIT; bundled open-source libraries follow their own licenses (see the ‘Open-source licenses’ screen in the app)."},"cat":"bible","tags":["연대기","인물","66권","지도","앱"],"date":"2026-11-15","type":"HTML","size":"4.4 MB","file":"files/bible-chronicle-ko.html","preview":"","members":false,"featured":true,"dl":0,"views":2,"cover":""}],"members":[],"requests":[]}
+{"settings":{"name":"Koinonia Archive","tag":{"ko":"코이노니아 아카이브","en":"Koinonia Archive"},"email":"honghoon69@gmail.com","adminHash":"37b0ae4a351202090d5cbe9e043ce06d7c6b74c42e8f79279025c0b0eb161bef","allowSignup":true,"requireLoginAll":true,"lang":"ko"},"categories":[{"id":"bible","ko":"Bible","en":"Bible","color":"#8b4a2b"},{"id":"ai","ko":"AI","en":"AI","color":"#2f6f8f"},{"id":"books","ko":"Books","en":"Books","color":"#5b7a3a"},{"id":"etc","ko":"기타","en":"Others","color":"#857d6e"}],"items":[{"id":"i1","title":{"ko":"성경 연대기 요약","en":"Bible Chronology at a Glance"},"desc":{"ko":"창세기부터 계시록까지 사건의 흐름을 연대순으로 정리한 한 장 요약본입니다. 장·절 표기를 함께 달아 두어 본문을 바로 찾아갈 수 있습니다.","en":"A one-page chronological summary from Genesis to Revelation, with chapter and verse references so you can jump straight to the text."},"cat":"bible","tags":["연대기","요약","66권"],"date":"2026-10-28","type":"HTML","size":"120 KB","file":"files/bible-chronology.html","preview":"","members":false,"featured":true,"dl":42,"views":182,"cover":""},{"id":"i2","title":{"ko":"창세기 흐름식 정리","en":"Genesis: A Flow Study"},"desc":{"ko":"장과 절 단위로 따라가며 읽을 수 있게 만든 창세기 노트입니다.","en":"Study notes that follow Genesis chapter by chapter and verse by verse."},"cat":"bible","tags":["창세기","흐름식"],"date":"2026-10-20","type":"PDF","size":"1.2 MB","file":"files/genesis-flow.pdf","preview":"","members":false,"featured":false,"dl":18,"views":91,"cover":""},{"id":"i3","title":{"ko":"프롬프트 작성 입문","en":"Prompt Writing 101"},"desc":{"ko":"AI에게 일을 맡길 때 쓰는 질문 구조와 예시를 모은 입문 자료입니다.","en":"A beginner's guide to structuring requests for AI, with worked examples."},"cat":"ai","tags":["프롬프트","입문"],"date":"2026-11-05","type":"PDF","size":"860 KB","file":"files/prompt-basics.pdf","preview":"","members":false,"featured":true,"dl":67,"views":240,"cover":""},{"id":"i4","title":{"ko":"AI로 업무 자동화하기","en":"Automating Work with AI"},"desc":{"ko":"반복 업무를 AI와 간단한 HTML 도구로 줄여 본 사례 모음입니다.","en":"Case studies on cutting repetitive work with AI and small HTML tools."},"cat":"ai","tags":["자동화","사례"],"date":"2026-11-10","type":"PDF","size":"2.4 MB","file":"files/ai-automation.pdf","preview":"","members":true,"featured":false,"dl":12,"views":75,"cover":""},{"id":"i5","title":{"ko":"독서 노트 서식","en":"Reading Note Template"},"desc":{"ko":"읽은 책을 한 장으로 남기는 독서 노트 양식(인쇄용)입니다.","en":"A printable one-page template for recording each book you read."},"cat":"books","tags":["독서","양식"],"date":"2026-10-12","type":"DOCX","size":"45 KB","file":"files/reading-note.docx","preview":"","members":false,"featured":false,"dl":31,"views":110,"cover":""},{"id":"i6","title":{"ko":"올해의 책 12권","en":"12 Books of the Year"},"desc":{"ko":"올해 읽은 책 가운데 다시 펼쳐 볼 12권의 짧은 소개입니다.","en":"Short introductions to the twelve books worth reopening this year."},"cat":"books","tags":["추천","독서"],"date":"2026-11-01","type":"PDF","size":"1.8 MB","file":"files/books-of-year.pdf","preview":"","members":false,"featured":false,"dl":22,"views":98,"cover":""},{"id":"i7","title":{"ko":"HTML 한 장 문서 만들기","en":"Single-File HTML Documents"},"desc":{"ko":"보안 때문에 파일 공유가 어려울 때 HTML 한 파일로 문서를 배포하는 방법입니다.","en":"How to distribute documents as a single HTML file when file sharing is restricted."},"cat":"etc","tags":["HTML","공유"],"date":"2026-10-30","type":"HTML","size":"38 KB","file":"files/html-onepager.html","preview":"","members":false,"featured":false,"dl":9,"views":40,"cover":""}],"members":[],"requests":[]}
 </script>
 
 <script>
@@ -694,5 +789,6 @@ async function download(name,data,mime){
 /* ── 시작 ── */
 load();$("#yr").textContent=new Date().getFullYear();renderAll();
 </script>
-</body>
-</html>
+
+
+</body></html>
